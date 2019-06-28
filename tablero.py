@@ -15,9 +15,7 @@ def casillas(texto, colortexto, color, fila, columna):
     casilla = Button(frame, text = texto)
     casilla.grid(row = fila, column = columna)
     casilla.config(bg = color, fg = colortexto, width = 5)
-
-    casilla.bind("<Button 1>",intercalar)
-
+    casilla.bind("<Button 1>",posin)
 
 def tablero():
     for f in range(2, 10):
@@ -53,25 +51,29 @@ def obtener_boton(fila,columna):
 def intercalar(event):
     event.widget.config(text='O') 
 
-def movimiento(event):
+def movimiento1(event):
     if(f>=4 and c>=2):
-        if(casillas("O", 'red','black', f, c)==casillas(" ", 'black', 'black', f, c) or casillas(" ", 'red','black', f, c)==casillas(" ", 'black', 'black', f, c)):
-            casillas("O", 'red','black', f, c)==casillas(" ", 'black', 'black', f, c)
+        if(casillas("O", 'white','black', f, c)==casillas(" ", 'black', 'black', f, c) or casillas(" ", 'red','black', f, c)==casillas(" ", 'black', 'black', f, c)):
+            casillas("O", 'white','black', f, c)==casillas(" ", 'black', 'black', f, c)
     if(f>4 and c>2):
-        if(casillas(" ", 'red','black', f, c)==casillas(" ", 'black', 'black', f, c)):
+        if(casillas(" ", 'white','black', f, c)==casillas(" ", 'black', 'black', f, c)):
             casillas(" ", 'black', 'black', f, c)==casillas("O", 'red','black', f, c)
 
 
 
-ventana.bind("<Button 1>",movimiento)
 
-f=2
-c=2
+ventana.bind("<Button 1>",movimiento1)
 
+def movimiento2(event):
+    if(f<=7 and c<=4):
+        if(casillas("O", 'white','black', f, c)==casillas(" ", 'black', 'black', f, c) or casillas(" ", 'white','black', f, c)==casillas(" ", 'black', 'black', f, c)):
+            casillas("O", 'white','black', f, c)==casillas(" ", 'black', 'black', f, c)
+    if(f<6 and c<5):
+        if(casillas(" ", 'white','black', f, c)==casillas(" ", 'black', 'black', f, c)):
+            casillas(" ", 'black', 'black', f, c)==casillas("O", 'white','black', f, c)
 
-#-------TITULO DEL JUEGO-----------------
-#titulo = Label(frame, text = "DAMAS")
-#titulo.grid(row = 1, column = 1, columnspan = 8)
+ventana.bind("<Button 2>",movimiento2)
+
 #-------CREACION DEL TABLERO------------
 tablero()
 #-----------BOTONES DE OPCIONES-----------
